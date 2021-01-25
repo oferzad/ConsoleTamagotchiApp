@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace ConsoleTamagotchiApp.DataTransferObjects
+{
+    class PetDTO
+    {
+        public int PetId { get; set; }
+        public string PetName { get; set; }
+        public int PlayerId { get; set; }
+        public double PetWeight { get; set; }
+        public DateTime PetBirthDay { get; set; }
+        public int HungerLevel { get; set; }
+        public int CleaningLevel { get; set; }
+        public int HappyLevel { get; set; }
+
+        public PetDTO() { }
+    }
+}
