@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsoleTamagotchiApp.DataTransferObjects;
 
-namespace TAMAGOTCHI.UI
+namespace ConsoleTamagotchiApp
 {
     class LoginScreen : Screen
     {

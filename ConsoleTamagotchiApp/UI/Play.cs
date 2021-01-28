@@ -6,7 +6,7 @@ using System.Text;
 using ConsoleTamagotchiApp.DataTransferObjects;
 using System.Threading.Tasks;
 
-namespace TAMAGOTCHI.UI
+namespace ConsoleTamagotchiApp
 {
     class Play : Screen
     {

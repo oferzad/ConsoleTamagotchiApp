@@ -98,6 +98,7 @@ namespace ConsoleTamagotchiApp.WebServices
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return false;
             }
         }
@@ -107,13 +108,13 @@ namespace ConsoleTamagotchiApp.WebServices
         {
             try
             {
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetAnimals");
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetPets");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
-                    };
+                    }; 
                     string content = await response.Content.ReadAsStringAsync();
                     List<PetDTO> fList = JsonSerializer.Deserialize<List<PetDTO>>(content, options);
                     return fList;

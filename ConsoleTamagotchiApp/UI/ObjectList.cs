@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 
-namespace TAMAGOTCHI.UI
+namespace ConsoleTamagotchiApp
 {
     class ObjectsList : Screen
     {

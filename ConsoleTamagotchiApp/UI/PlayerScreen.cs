@@ -6,7 +6,7 @@ using ConsoleTamagotchiApp.DataTransferObjects;
 using System.Threading.Tasks;
 
 
-namespace TAMAGOTCHI.UI
+namespace ConsoleTamagotchiApp
 {
     class PlayerScreen : Screen
     {
@@ -21,7 +21,7 @@ namespace TAMAGOTCHI.UI
             base.Show();
             ObjectView showPlayer = new ObjectView("", UIMain.CurrentPlayer);
             showPlayer.Show();
-            Console.WriteLine("Press A to see Player Animals or other key to go back!");
+            Console.WriteLine("Press A to see Player pets or other key to go back!");
             char c = Console.ReadKey().KeyChar;
             if (c == 'a' || c == 'A')
             {
@@ -35,8 +35,8 @@ namespace TAMAGOTCHI.UI
                     //Create list to be displayed on screen
                     //Format the desired fields to be shown! (screen is not wide enough to show all)
 
-                    List<Object> animals = list.ToList<Object>();
-                    ObjectsList oList = new ObjectsList("pets", animals);
+                    List<Object> pets = list.ToList<Object>();
+                    ObjectsList oList = new ObjectsList("pets", pets);
                     oList.Show();
                     Console.WriteLine();
                 }

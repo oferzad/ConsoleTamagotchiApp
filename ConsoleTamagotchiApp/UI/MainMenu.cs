@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TAMAGOTCHI.UI
+namespace ConsoleTamagotchiApp
 {
     class MainMenu : Menu
     {
@@ -11,10 +11,8 @@ namespace TAMAGOTCHI.UI
             //Build items in main menu!
             AddItem("Show player", new PlayerScreen());
             AddItem("Update details", new PlayerUpdate());
-            AddItem("Options Menu", new MenuOptions());
             AddItem("Play with your pet", new Play());
             AddItem("Feed your pet!", new Feed());
-            AddItem("Clean your pet", new Clean());
         }
     }
 }

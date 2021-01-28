@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace TAMAGOTCHI.UI
+namespace ConsoleTamagotchiApp
 {
     class Feed : Screen
     {
