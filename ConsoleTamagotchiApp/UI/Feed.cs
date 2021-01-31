@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
+using ConsoleTamagotchiApp.DataTransferObjects;
+using System.Threading.Tasks;
 
 namespace ConsoleTamagotchiApp
 {
@@ -16,25 +18,26 @@ namespace ConsoleTamagotchiApp
             base.Show();
             try
             {
-                List<ActionOption> list = UIMain.db.GetFoodList();
-                ObjectsList foods = new ObjectsList("Food", list.ToList<object>());
+                Task<List<ActionOptionDTO>> list = UIMain.api.GetAllFoodAsync();
+                ObjectsList foods = new ObjectsList("Food", list.Result.ToList<object>());
                 foods.Show();
                 Console.WriteLine();
 
                 Console.WriteLine("please enter food ID:");
-                int foodid = int.Parse(Console.ReadLine());
-
-                const int DEADid = 4;
-                Pet p = UIMain.CurrentPlayer.Pets.Where(p => p.LifeStatusId != DEADid).FirstOrDefault();
-                ActionOption ao = UIMain.db.ActionOptions.Where(a => a.OptionId == foodid).FirstOrDefault();
+                int foodId = int.Parse(Console.ReadLine());
+                const int DEAD_STATUS_ID = 4;
+                Task<List<PetDTO>> playerPets = UIMain.api.GetPlayerPetsAsync();
+                PetDTO p = playerPets.Result.Where(p => p.LifeStatusId != DEAD_STATUS_ID).FirstOrDefault();
+                ActionOptionDTO actionOptionDTO = list.Result.Where(a => a.OptionId == foodId).FirstOrDefault();
                 if (p == null)
-                {
                     Console.WriteLine("you do not own an active pet:(");
-                }
                 else
                 {
-                    p.feed(ao);
-                    Console.WriteLine("you fed your pet {0}. \n YUMMY!", ao.OptioName);
+                    Task<bool> task = UIMain.api.DoActionFeedAsync(actionOptionDTO);
+                    if (task.Result)
+                        Console.WriteLine($"The pet ate {actionOptionDTO.OptioName}. \n YUMMY!");
+                    else
+                        Console.WriteLine("Something wrong happened!");
                 }
             }
             catch (Exception e)
