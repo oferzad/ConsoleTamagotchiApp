@@ -33,6 +33,7 @@ namespace ConsoleTamagotchiApp
                 if (readable)
                 {
                     Object prop = propInfo.GetValue(obj);
+                    if (prop!=null)
                     //Do not display lists, arrays, classes, etc...
                     if (!(prop.GetType().IsClass && !prop.GetType().Equals(typeof(string))))
                         Console.WriteLine("\t{0}: {1}", propInfo.Name, propInfo.GetValue(obj));
