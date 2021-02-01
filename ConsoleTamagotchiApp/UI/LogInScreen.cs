@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsoleTamagotchiApp.DataTransferObjects;
 
-namespace TAMAGOTCHI.UI
+namespace ConsoleTamagotchiApp
 {
     class LoginScreen : Screen
     {
@@ -29,6 +29,15 @@ namespace TAMAGOTCHI.UI
                 }
             }
 
+            //לבדוק האם השחקן רוצה להירשם או להיכנס
+            //Console.WriteLine("Press 'S' to sign up or other key to login");
+            //char ch = Console.ReadKey().KeyChar;
+            //if (ch == 'S' || ch == 's')
+            //{
+            //    SignUpScreen su = new SignUpScreen();
+            //    su.Show();
+            //}
+
             //if user is still logged in, we should go out!= back to menu
             while (UIMain.CurrentPlayer == null)
             {
@@ -52,6 +61,7 @@ namespace TAMAGOTCHI.UI
                     Console.ReadKey();
                 }
             }
+
             //Show main menu once user is logged in
             MainMenu menu = new MainMenu();
             menu.Show();

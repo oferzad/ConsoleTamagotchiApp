@@ -16,6 +16,8 @@ namespace ConsoleTamagotchiApp.DataTransferObjects
         public int HungerLevel { get; set; }
         public int CleaningLevel { get; set; }
         public int HappyLevel { get; set; }
+        public int LifeStatusId { get; set; }
+        public int LifeCycleId { get; set; }
 
         public PetDTO() { }
     }

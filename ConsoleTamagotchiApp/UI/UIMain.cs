@@ -4,7 +4,7 @@ using System.Text;
 using ConsoleTamagotchiApp.DataTransferObjects;
 using ConsoleTamagotchiApp.WebServices;
 
-namespace TAMAGOTCHI.UI
+namespace ConsoleTamagotchiApp
 {
     class UIMain
     {
