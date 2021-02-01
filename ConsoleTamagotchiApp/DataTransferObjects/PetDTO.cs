@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleTamagotchiApp.DataTransferObjects
 {
-    class PetDTO
+    public class PetDTO
     {
         public int PetId { get; set; }
         public string PetName { get; set; }

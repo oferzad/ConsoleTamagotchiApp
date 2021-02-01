@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleTamagotchiApp.DataTransferObjects
 {
-    class PlayerDTO
+   public class PlayerDTO
     {
         public int PlayerId { get; set; }
         public string PlayerName { get; set; }
