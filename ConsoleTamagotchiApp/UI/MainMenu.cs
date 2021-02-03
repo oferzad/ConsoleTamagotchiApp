@@ -10,7 +10,7 @@ namespace ConsoleTamagotchiApp
         {
             //Build items in main menu!
             AddItem("Show player", new PlayerScreen());
-            //AddItem("Update details", new PlayerUpdate());
+            AddItem("Update details", new PlayerUpdate());
             AddItem("Play with your pet", new Play());
             AddItem("Feed your pet!", new Feed());
         }

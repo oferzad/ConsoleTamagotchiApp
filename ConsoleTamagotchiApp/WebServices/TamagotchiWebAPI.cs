@@ -211,13 +211,13 @@ namespace ConsoleTamagotchiApp.WebServices
             }
         }
 
-        public async void UpdateAsync(PlayerDTO player)
-        {
-            string json = JsonSerializer.Serialize(player);
-            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/Update", content);
+        public async Task UpdateAsync(PlayerDTO player)
+        {    
             try
             {
+                string json = JsonSerializer.Serialize(player);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/Update", content);
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
@@ -227,14 +227,12 @@ namespace ConsoleTamagotchiApp.WebServices
                     string contentt = await response.Content.ReadAsStringAsync();
                     PlayerDTO p = JsonSerializer.Deserialize<PlayerDTO>(contentt, options);
                 }
-
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-
-            }
+        }
         public async Task<PlayerDTO> LoginAsync(string email, string pass)
         {
             try

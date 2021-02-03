@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleTamagotchiApp.DataTransferObjects;
+using TAMAGOTCHI.UI;
 
 namespace ConsoleTamagotchiApp
 {
@@ -30,13 +31,13 @@ namespace ConsoleTamagotchiApp
             }
 
             //לבדוק האם השחקן רוצה להירשם או להיכנס
-            //Console.WriteLine("Press 'S' to sign up or other key to login");
-            //char ch = Console.ReadKey().KeyChar;
-            //if (ch == 'S' || ch == 's')
-            //{
-            //    SignUpScreen su = new SignUpScreen();
-            //    su.Show();
-            //}
+            Console.WriteLine("Press 'S' to sign up or other key to login");
+            char ch = Console.ReadKey().KeyChar;
+            if (ch == 'S' || ch == 's')
+            {
+                SignUpScreen su = new SignUpScreen();
+                su.Show();
+            }
 
             //if user is still logged in, we should go out!= back to menu
             while (UIMain.CurrentPlayer == null)
