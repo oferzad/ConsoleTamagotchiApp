@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace TAMAGOTCHI.UI
+namespace ConsoleTamagotchiApp
 {
     class SignUpScreen : Screen
     {
