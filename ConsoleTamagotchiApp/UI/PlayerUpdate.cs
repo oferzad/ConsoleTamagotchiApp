@@ -9,12 +9,6 @@ namespace ConsoleTamagotchiApp
 {
     class PlayerUpdate : Screen
     {
-        string playername;
-        string playerlastname;
-        string playeremail;
-        string playerusername;
-        string playerpassword;
-
         public PlayerUpdate() : base("Update player details")
         {
         }
@@ -26,6 +20,7 @@ namespace ConsoleTamagotchiApp
             try
             {
                 Console.WriteLine("please enter your details ");
+
                 Console.WriteLine("Please Type new username: ");
                 string newUserName = Console.ReadLine();
                 UIMain.CurrentPlayer.PlayerUsername = newUserName;
@@ -43,6 +38,7 @@ namespace ConsoleTamagotchiApp
 
                 Console.WriteLine("Please Type your last name: ");
                 string newlastName = Console.ReadLine();
+                UIMain.CurrentPlayer.PlayerLastName = newlastName;
 
                 Console.WriteLine("Please Type your email: ");
                 string newEmail = Console.ReadLine();
@@ -58,7 +54,7 @@ namespace ConsoleTamagotchiApp
 
                 };
                 Task t = UIMain.api.UpdateAsync(player);
-                Console.WriteLine("Wait while Updating" + ".....");
+                Console.WriteLine("Wait while Updating.....");
                 t.Wait();
              
                 Console.WriteLine("The details changed successfully!");
