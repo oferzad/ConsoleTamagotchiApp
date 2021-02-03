@@ -1,94 +1,86 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Text;
+﻿using ConsoleTamagotchiApp.DataTransferObjects;
+using System;
+using System.Threading.Tasks;
 
-//namespace ConsoleTamagotchiApp
-//{
-//    class SignUpScreen : Screen
-//    {
-//        //קבועים
-//        const int START_LEVELS = 50;
-//        const int START_LIFE_ID = 1;
-//        const int START_PET_WEIGHT = 3;
-//        //פרטי השחקן
-//        string playerName;
-//        string playerLastName;
-//        string playerEmail;
-//        string playerGenedr;
-//        DateTime playerBirthDay;
-//        string playerUsername;
-//        string playerPassword;
-//        //פרטי החיה
-//        string petName;
+namespace TAMAGOTCHI.UI
+{
+    class SignUpScreen : Screen
+    {
 
-//        public SignUpScreen() : base("Sign Up") { }
+        //פרטי השחקן
+        string playername;
+        string playerlastname;
+        string playeremail;
+        string playergenedr;
+        DateTime playerbirthDay;
+        string playerusername;
+        string playerpassword;
+        //פרטי החיה
 
-//        public override void Show()
-//        {
-//            base.Show();
-//            try
-//            {
-//                //קריאת פרטים מהמשתמש
-//                Console.WriteLine("Please type your detailes");
-//                Console.Write("First name: ");
-//                playerName = Console.ReadLine();
-//                Console.Write("Last name: ");
-//                playerLastName = Console.ReadLine();
-//                Console.Write("Email: ");
-//                playerEmail = Console.ReadLine();
-//                Console.Write("Gender: ");
-//                playerGenedr = Console.ReadLine();
-//                Console.Write("Birthday: ");
-//                playerBirthDay = DateTime.Parse(Console.ReadLine());
-//                Console.Write("Choose a user name: ");
-//                playerUsername = Console.ReadLine();
-//                Console.Write("Choose a password: ");
-//                playerPassword = Console.ReadLine();
-//                Console.Write("choose your pet's name: ");
-//                petName = Console.ReadLine();
 
-//                Player player = new Player()
-//                {
-//                    PlayerName = playerName,
-//                    PlayerLastName = playerLastName,
-//                    PlayerEmail = playerEmail,
-//                    PlayerGenedr = playerGenedr,
-//                    PlayerBirthDay = playerBirthDay,
-//                    PlayerUsername = playerUsername,
-//                    PlayerPassword = playerPassword
-//                };
-//                //הוספת השחקן
-//                UIMain.db.AddPlayer(player);
-//                UIMain.db.SaveChanges();
+        public SignUpScreen() : base("Sign Up") { }
 
-//                //playerId = player.PlayerId;
-//                Pet pet = new Pet()
-//                {
-//                    //PlayerId = playerId,
-//                    PetName = petName,
-//                    HungerLevel = START_LEVELS,
-//                    CleaningLevel = START_LEVELS,
-//                    HappyLevel = START_LEVELS,
-//                    LifeCycleId = START_LIFE_ID,
-//                    LifeStatusId = START_LIFE_ID,
-//                    PetBirthDay = DateTime.Now,
-//                    PetWeight = START_PET_WEIGHT
-//                };
-//                //הוספת החיה        
-//                player.AddPet(pet);
-//                UIMain.db.SaveChanges();
-//                Console.WriteLine("You are signed up!");
+        public override void Show()
+        {
+            base.Show();
 
-//                Console.WriteLine("Press any key to login!");
-//                Console.ReadKey();
+            if (UIMain.CurrentPlayer != null)
+            {
+                Console.WriteLine($"Currently, {0} is logged in. Press Y to log out or other key to go back to menu!");
+                char c = Console.ReadKey().KeyChar;
+                if (c == 'Y' || c == 'y')
+                {
+                    UIMain.CurrentPlayer = null;
+                }
+            }
 
-//            }
-//            catch (Exception e)
-//            {
-//                Console.Clear();
-//                Console.WriteLine("Something wrong happened");
-//                Console.WriteLine($"Error massage: {e.Message}");
-//            }
-//        }
-//    }
-//}
+            while (UIMain.CurrentPlayer == null)
+            {
+                //Clear screen again
+                base.Show();
+
+                Console.WriteLine("Please type your detailes");
+                Console.Write("First name: ");
+                playername = Console.ReadLine();
+                Console.Write("Last name: ");
+                playerlastname = Console.ReadLine();
+                Console.Write("Email: ");
+                playeremail = Console.ReadLine();
+                Console.Write("Gender: ");
+                playergenedr = Console.ReadLine();
+                Console.Write("Birthday: ");
+                playerbirthDay = DateTime.Parse(Console.ReadLine());
+                Console.Write("Choose a user name: ");
+                playerusername = Console.ReadLine();
+                Console.Write("Choose a password: ");
+                playerpassword = Console.ReadLine();
+
+                PlayerDTO pdto = new PlayerDTO()
+                {
+                    PlayerName = playername,
+                    PlayerLastName = playerlastname,
+                    PlayerEmail = playeremail,
+                    PlayerGender = playergenedr,
+                    PlayerBirthDay = playerbirthDay,
+                    PlayerUsername = playerusername,
+                    PlayerPassword = playerpassword
+                };
+
+                Task<PlayerDTO> t = UIMain.api.SignUpAsync(pdto);
+                Console.WriteLine("Wait while Signing Up" + ".....");
+                t.Wait();
+                UIMain.CurrentPlayer = t.Result;
+
+                if (UIMain.CurrentPlayer == null)
+                {
+                    Console.WriteLine("Sorry, you can not sign up with this Email address. \n please try another address or try to log in");
+                    Console.ReadKey();
+                }
+
+            }
+
+            MainMenu menu = new MainMenu();
+            menu.Show();
+        }
+    }
+}
