@@ -130,32 +130,36 @@ namespace ConsoleTamagotchiApp.WebServices
             }
         }
 
-        public async Task<PlayerDTO> SignUpAsync(PlayerDTO player1)
+        public async Task<bool> SignUpAsync(PlayerDTO player1)
         {
+            string url = $"{this.baseUri}/SignUp";
+
             try
             {
                 string jason = JsonSerializer.Serialize(player1);
+                
                 StringContent content = new StringContent(jason, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/SignUp", content);
+
+                HttpResponseMessage response = await this.client.PostAsync(url, content);
+                
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
                     };
-                    string content2 = await response.Content.ReadAsStringAsync();
-                    PlayerDTO p = JsonSerializer.Deserialize<PlayerDTO>(content2, options);
-                    return p;
+                   
+                    return true;
                 }
                 else
                 {
-                    return null;
+                    return false;
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return null;
+                return false;
             }
         }
         public async Task<bool> DoActionFeedAsync(ActionOptionDTO actionOptionDTO)

@@ -15,9 +15,7 @@ namespace ConsoleTamagotchiApp
         DateTime playerbirthDay;
         string playerusername;
         string playerpassword;
-        //פרטי החיה
-
-
+        
         public SignUpScreen() : base("Sign Up") { }
 
         public override void Show()
@@ -55,6 +53,8 @@ namespace ConsoleTamagotchiApp
                 Console.Write("Choose a password: ");
                 playerpassword = Console.ReadLine();
 
+                
+
                 PlayerDTO pdto = new PlayerDTO()
                 {
                     PlayerName = playername,
@@ -63,24 +63,35 @@ namespace ConsoleTamagotchiApp
                     PlayerGender = playergenedr,
                     PlayerBirthDay = playerbirthDay,
                     PlayerUsername = playerusername,
-                    PlayerPassword = playerpassword
+                    PlayerPassword = playerpassword,
+                    
                 };
 
-                Task<PlayerDTO> t = UIMain.api.SignUpAsync(pdto);
+                
+                Task<bool> t = UIMain.api.SignUpAsync(pdto);
                 Console.WriteLine("Wait while Signing Up" + ".....");
                 t.Wait();
-                UIMain.CurrentPlayer = t.Result;
+                if(t.Result)
+                {
+                    UIMain.CurrentPlayer = pdto;
+                    Console.WriteLine("You have signed up!");
+                }
 
                 if (UIMain.CurrentPlayer == null)
                 {
-                    Console.WriteLine("Sorry, you can not sign up with this Email address. \n please try another address or try to log in");
+                    Console.WriteLine("Sorry, you can not sign up with this Email address. \n please try another address or try to log in by pressing 'L'");
+                    char c = Console.ReadKey().KeyChar;
+                    if (c == 'l' || c == 'L')
+                    {
+                        LoginScreen log = new LoginScreen();
+                        log.Show();
+                    }
                     Console.ReadKey();
                 }
 
             }
 
-            MainMenu menu = new MainMenu();
-            menu.Show();
+           
         }
     }
 }
