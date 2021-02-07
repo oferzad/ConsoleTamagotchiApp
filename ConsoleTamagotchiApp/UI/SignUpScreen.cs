@@ -15,7 +15,9 @@ namespace ConsoleTamagotchiApp
         DateTime playerbirthDay;
         string playerusername;
         string playerpassword;
+       
         
+
         public SignUpScreen() : base("Sign Up") { }
 
         public override void Show()
@@ -53,10 +55,11 @@ namespace ConsoleTamagotchiApp
                 Console.Write("Choose a password: ");
                 playerpassword = Console.ReadLine();
 
-                
+
 
                 PlayerDTO pdto = new PlayerDTO()
                 {
+                    
                     PlayerName = playername,
                     PlayerLastName = playerlastname,
                     PlayerEmail = playeremail,
@@ -66,7 +69,7 @@ namespace ConsoleTamagotchiApp
                     PlayerPassword = playerpassword,
                     
                 };
-
+                
                 
                 Task<bool> t = UIMain.api.SignUpAsync(pdto);
                 Console.WriteLine("Wait while Signing Up" + ".....");
@@ -75,6 +78,7 @@ namespace ConsoleTamagotchiApp
                 {
                     UIMain.CurrentPlayer = pdto;
                     Console.WriteLine("You have signed up!");
+                    
                 }
 
                 if (UIMain.CurrentPlayer == null)

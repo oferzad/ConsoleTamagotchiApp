@@ -228,8 +228,7 @@ namespace ConsoleTamagotchiApp.WebServices
                     {
                         PropertyNameCaseInsensitive = true
                     };
-                    string contentt = await response.Content.ReadAsStringAsync();
-                    PlayerDTO p = JsonSerializer.Deserialize<PlayerDTO>(contentt, options);
+                  
                 }
             }
             catch (Exception e)

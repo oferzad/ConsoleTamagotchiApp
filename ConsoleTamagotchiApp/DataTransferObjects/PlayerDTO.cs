@@ -16,7 +16,7 @@ namespace ConsoleTamagotchiApp.DataTransferObjects
         public string PlayerGender { get; set; }
         public string PlayerUsername { get; set; }
         public string PlayerPassword { get; set; }
-
+        public string PetName { get; set; }
         public PlayerDTO() { }
     }
 }
